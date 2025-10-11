@@ -4,7 +4,6 @@
 #include <cctype>
 using namespace std;
 
-// function prototypes
 string encryptCaesar(string text, int shift);
 string decryptCaesar(string text, int shift);
 string reverseText(string text);
@@ -12,7 +11,6 @@ void saveToFile(string fileName, string data);
 string loadFromFile(string fileName);
 void menu();
 
-// main
 int main() {
     int choice;
     string text, result;
@@ -23,7 +21,7 @@ int main() {
         menu();
         cout << "Enter choice: ";
         cin >> choice;
-        cin.ignore(); // clear input buffer
+        cin.ignore();
 
         switch (choice) {
             case 1:
@@ -80,18 +78,17 @@ int main() {
 
 // show menu
 void menu() {
-    cout << "\n===== CipherCrafter =====\n";
-    cout << "1. Encrypt Message (Caesar Cipher)\n";
-    cout << "2. Decrypt Message (Caesar Cipher)\n";
+    cout << "\n===== Encryption Tool =====\n";
+    cout << "1. Encrypt Message\n";
+    cout << "2. Decrypt Message\n";
     cout << "3. Reverse Message\n";
     cout << "4. Load Message from File\n";
     cout << "5. Exit\n";
     cout << "==========================\n";
 }
 
-// encrypt using Caesar Cipher
-string encryptCaesar(string text, int shift) {
-    string result = "";
+string encryptCaesar(string text, int shift) { // Caesar Cipher it just changes the letter to a the next letter in the alphabet by the shift amount
+    string result = "";                        // a shifter by 2 is c
     for (char c : text) {
         if (isalpha(c)) {
             char base = isupper(c) ? 'A' : 'a';
@@ -103,8 +100,7 @@ string encryptCaesar(string text, int shift) {
     return result;
 }
 
-// decrypt using Caesar Cipher
-string decryptCaesar(string text, int shift) {
+string decryptCaesar(string text, int shift) { // changes the letters by input shift amount
     string result = "";
     for (char c : text) {
         if (isalpha(c)) {
@@ -117,8 +113,7 @@ string decryptCaesar(string text, int shift) {
     return result;
 }
 
-// reverse text
-string reverseText(string text) {
+string reverseText(string text) { // writes it backwards
     string result = "";
     for (int i = text.length() - 1; i >= 0; i--) {
         result += text[i];
@@ -126,9 +121,8 @@ string reverseText(string text) {
     return result;
 }
 
-// save to file
-void saveToFile(string fileName, string data) {
-    ofstream file(fileName);
+void saveToFile(string fileName, string data) { // saves input in a text file so you can see what you input or send it to a friend so they can decrypt the message
+    ofstream file(fileName);                    // you also gotta tell em the shift amount
     if (file.is_open()) {
         file << data;
         file.close();
@@ -138,7 +132,6 @@ void saveToFile(string fileName, string data) {
     }
 }
 
-// load from file
 string loadFromFile(string fileName) {
     ifstream file(fileName);
     string line, data = "";
@@ -152,3 +145,4 @@ string loadFromFile(string fileName) {
     }
     return data;
 }
+
