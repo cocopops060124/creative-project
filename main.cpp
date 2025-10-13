@@ -55,12 +55,17 @@ int main() {
                 break;
 
             case 4:
-                cout << "\nEnter file name to load (ex: encrypted.txt): ";
+                cout << "\nEnter file name to load (encrypted.txt or decrypted.txt): ";
                 getline(cin, text);
                 result = loadFromFile(text);
                 cout << "\nFile Contents:\n" << result << endl;
 
                 
+                if (result == "Error: File not found.") { // don't ask to encrypt/decrypt if file not found
+                    cout << "\nCannot process file since it was not found.\n";
+                    break;
+                }
+
                 char option; // option to encrypt or decrypt text file
                 cout << "\nDo you want to Encrypt or Decrypt this text? (Enter E, D or N for none): ";
                 cin >> option;
@@ -170,6 +175,7 @@ string loadFromFile(string fileName) {
     }
     return data;
 }
+
 
 
 
