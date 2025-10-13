@@ -59,6 +59,31 @@ int main() {
                 getline(cin, text);
                 result = loadFromFile(text);
                 cout << "\nFile Contents:\n" << result << endl;
+
+                
+                char option; // option to encrypt or decrypt text file
+                cout << "\nDo you want to Encrypt or Decrypt this text? (Enter E, D or N for none): ";
+                cin >> option;
+                option = toupper(option);
+
+                if (option == 'E' || option == 'D') {
+                    cout << "Enter shift amount: ";
+                    cin >> shift;
+                    cin.ignore();
+                    string processed;
+
+                    if (option == 'E') {
+                        processed = encryptCaesar(result, shift);
+                        cout << "\nEncrypted Text:\n" << processed << endl;
+                        saveToFile("loaded_encrypted.txt", processed);
+                    } else {
+                        processed = decryptCaesar(result, shift);
+                        cout << "\nDecrypted Text:\n" << processed << endl;
+                        saveToFile("loaded_decrypted.txt", processed);
+                    }
+                } else {
+                    cout << "\nNo encryption/decryption chosen.\n";
+                }
                 break;
 
             case 5:
@@ -145,4 +170,6 @@ string loadFromFile(string fileName) {
     }
     return data;
 }
+
+
 
